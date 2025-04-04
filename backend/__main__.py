@@ -1,22 +1,28 @@
 import sys
 import os
-import streamlit as st
 
 # Add the project root directory to sys.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from backend.module import face_recognition
+from backend.module.recognizeface import load_json_data, recognize
+
 
 def main():
-    st.title("Face Recognition App")
-    st.write("Click the button below to run face recognition.")
-    
-    if st.button("Run Face Recognition"):
-        face_recognition()
-        st.success("Face recognition completed!")
+    data = load_json_data()
+    if data:
+        recognition_results = recognize(data)
 
-# To run the app, use the following command in the terminal:
-# streamlit run /Users/gk/Documents/GitHub/Face/backend/__main__.py
+        if recognition_results:
+            print("\n🎯 Recognition Summary:")
+            for res in recognition_results:
+                print(
+                    f"🔹 Name: {res['name']}, Email: {res['email']}, Face ID: {res['face_id']}"
+                )
+                print(f"📷 Uploaded Image: {res['uploaded_image']}")
+                print(f"📷 Matched Image: {res['matched_image']}")
+        else:
+            print("⚠️ No faces recognized.")
+
 
 if __name__ == "__main__":
     main()

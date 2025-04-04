@@ -1,4 +1,3 @@
- 
 import json
 import mysql.connector
 import os
@@ -7,7 +6,8 @@ from dotenv import load_dotenv  # ✅ Load environment variables
 # ✅ Load environment variables from .env file
 load_dotenv()
 
-LIST_JSON_FILE = os.path.join(os.path.dirname(__file__), "list.json")
+LIST_JSON_FILE = os.path.join(os.path.dirname(__file__), "jsons", "list.json")
+
 
 def load_list_json():
     """Loads the name and email from list.json."""
@@ -24,14 +24,7 @@ def load_list_json():
 
 def save_list_json(name, email):
     """Overwrites the list.json file with the latest details only."""
-    data = {
-        "user_info": [
-            {
-                "name": name,
-                "mail_id": email
-            }
-        ]
-    }
+    data = {"user_info": [{"name": name, "mail_id": email}]}
     with open(LIST_JSON_FILE, "w") as file:
         json.dump(data, file, indent=4)
 
@@ -43,16 +36,16 @@ def fetch_database_data():
             host=os.getenv("MYSQL_HOST"),
             user=os.getenv("MYSQL_USER"),
             password=os.getenv("MYSQL_PASSWORD"),  # ✅ Now securely stored
-            database=os.getenv("MYSQL_DATABASE")
+            database=os.getenv("MYSQL_DATABASE"),
         )
         cursor = conn.cursor(dictionary=True)  # Fetch results as dictionary
-        
+
         cursor.execute("SELECT * FROM UserDetails")
         rows = cursor.fetchall()
-        
+
         cursor.close()
         conn.close()
-        
+
         return rows if rows else None
     except mysql.connector.Error as e:
         print(f"❌ MySQL Error: {e}")
@@ -73,18 +66,20 @@ def check_face_data():
         print("Database Row:", row)  # Debugging statement
 
         # Ensure case-insensitive matching for name and email
-        if row.get("NAME", "").lower() == name.lower() and row.get("MAIL_ID", "").lower() == email.lower():
+        if (
+            row.get("NAME", "").lower() == name.lower()
+            and row.get("MAIL_ID", "").lower() == email.lower()
+        ):
             face_id = row.get("SERVER_ID", "No Face ID")  # Check if face_id exists
-            
+
             # If face_id is "No Face ID", return an error message
             if face_id == "No Face ID":
                 return None, "⚠️ Face is not added by the system."
-            
+
             return {
                 "name": row["NAME"],
                 "email": row["MAIL_ID"],
-                "image_url": row.get("IMAGE_URL", None)  # Image URL if available
+                "image_url": row.get("IMAGE_URL", None),  # Image URL if available
             }, None
 
     return None, "No matching Face ID found."
-

@@ -1,0 +1,24 @@
+[project]
+name = "recognition"
+version = "0.1.0"
+description = "Face Recognition System"
+authors = [
+    { name = "Your Name", email = "you@example.com" }
+]
+packages = [
+    { include = "backend" }
+]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.12"
+boto3 = "1.34.162"
+mysql-connector-python = "8.3.0"  # Changed from mysql-connector-repackaged
+pandas = "2.2.3"
+python-dotenv = "1.1.0"
+requests = "2.32.3"
+streamlit = "1.41.1"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

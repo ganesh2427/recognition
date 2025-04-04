@@ -1,4 +1,3 @@
-
 import json
 import mysql.connector
 import requests
@@ -8,21 +7,15 @@ from dotenv import load_dotenv  # ✅ Load environment variables
 # ✅ Load environment variables from .env file
 load_dotenv()
 
-JSON_FILE = os.path.join(os.path.dirname(__file__), "input.json")
+JSON_FILE = os.path.join(os.path.dirname(__file__), "jsons", "input.json")
+
 
 def save_json(name, email, image_url):
     """Overwrites the JSON file with the latest details only."""
-    data = {
-        "user_info": [
-            {
-                "name": name,
-                "mail_id": email,
-                "image_url": image_url
-            }
-        ]
-    }
+    data = {"user_info": [{"name": name, "mail_id": email, "image_url": image_url}]}
     with open(JSON_FILE, "w") as file:
         json.dump(data, file, indent=4)
+
 
 def addface(file_url):
     url = "https://api.edenai.run/v2/image/face_recognition/add_face"
@@ -32,21 +25,22 @@ def addface(file_url):
         "attributes_as_list": False,
         "show_original_response": False,
         "providers": "amazon",
-        "file_url": file_url
+        "file_url": file_url,
     }
     headers = {
         "accept": "application/json",
         "content-type": "application/json",
-        "authorization": f"Bearer {os.getenv('EDENAI_API_KEY')}"  # ✅ API Key from .env
+        "authorization": f"Bearer {os.getenv('EDENAI_API_KEY')}",  # ✅ API Key from .env
     }
 
     try:
         response = requests.post(url, json=payload, headers=headers)
-        response.raise_for_status()   
+        response.raise_for_status()
         return response.json()  # ✅ Return JSON instead of text
     except requests.exceptions.RequestException as e:
         print(f"❌ API Error: {e}")
         return None  # Return None if request fails
+
 
 # ✅ Load User Data from input.json
 try:
@@ -56,6 +50,7 @@ except FileNotFoundError:
     print("❌ Error: input.json file not found!")
     exit()
 
+
 # ✅ Function to Insert Data into MySQL
 def insert_data(data):
     try:
@@ -64,7 +59,7 @@ def insert_data(data):
             host=os.getenv("MYSQL_HOST"),
             user=os.getenv("MYSQL_USER"),
             password=os.getenv("MYSQL_PASSWORD"),  # ✅ Secure credentials
-            database=os.getenv("MYSQL_DATABASE")
+            database=os.getenv("MYSQL_DATABASE"),
         )
         if conn.is_connected():
             print("✅ Connected to MySQL database")
@@ -104,6 +99,7 @@ def insert_data(data):
     cur.close()
     conn.close()
     print("🎉 All data processed successfully!")
+
 
 # ✅ Run the function
 insert_data(data)

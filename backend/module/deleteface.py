@@ -1,5 +1,3 @@
- 
-
 import json
 import mysql.connector
 import requests
@@ -8,6 +6,7 @@ from dotenv import load_dotenv  # ✅ Load environment variables
 
 # ✅ Load environment variables from .env file
 load_dotenv()
+
 
 # Function to delete face from the API
 def deleteface(face_id):
@@ -18,12 +17,12 @@ def deleteface(face_id):
         "attributes_as_list": False,
         "show_original_response": False,
         "providers": "amazon",
-        "face_id": face_id
+        "face_id": face_id,
     }
     headers = {
         "accept": "application/json",
         "content-type": "application/json",
-        "authorization": f"Bearer {os.getenv('EDENAI_API_KEY')}"  # ✅ API Key from .env
+        "authorization": f"Bearer {os.getenv('EDENAI_API_KEY')}",  # ✅ API Key from .env
     }
 
     response = requests.post(url, json=payload, headers=headers)
@@ -38,6 +37,7 @@ def deleteface(face_id):
     else:
         return False, f"❌ API Error: {response.text}"
 
+
 # Function to delete user data
 def delete_data(email):
     if not email:
@@ -49,7 +49,7 @@ def delete_data(email):
             host=os.getenv("MYSQL_HOST"),
             user=os.getenv("MYSQL_USER"),
             password=os.getenv("MYSQL_PASSWORD"),  # ✅ Now securely stored
-            database=os.getenv("MYSQL_DATABASE")
+            database=os.getenv("MYSQL_DATABASE"),
         )
         if not conn.is_connected():
             return False, "❌ Error: Unable to connect to MySQL database."
@@ -90,5 +90,3 @@ def delete_data(email):
 
     except mysql.connector.Error as e:
         return False, f"❌ MySQL Error: {str(e)}"
-
-

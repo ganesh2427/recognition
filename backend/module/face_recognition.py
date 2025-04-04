@@ -1,15 +1,15 @@
 import streamlit as st
 import os
 import json
-from s3bucket import upload_to_s3  # Importing the upload function
+from backend.module.s3bucket import upload_to_s3  # Importing the upload function
 from backend.module.addface_ import (
     insert_data,
     save_json,
 )  # Importing function from addface.py
-from listface import check_face_data, load_list_json, save_list_json
+from backend.module.listface import check_face_data, load_list_json, save_list_json
 import pandas as pd
-from deleteface import delete_data
-from recognizeface import save_recognize_json, load_json_data, recognize
+from backend.module.deleteface import delete_data
+from backend.module.recognizeface import save_recognize_json, load_json_data, recognize
 
 
 JSON_FILE = os.path.join(os.path.dirname(__file__), "jsons", "input.json")
@@ -17,6 +17,7 @@ LIST_JSON_FILE = os.path.join(os.path.dirname(__file__), "jsons", "list.json")
 
 
 def app():
+     
     st.title("Face Recognition System")
 
     tab1, tab2, tab3, tab4 = st.tabs(

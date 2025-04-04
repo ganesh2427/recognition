@@ -2,12 +2,11 @@ import json
 import mysql.connector
 import requests
 import os
-from dotenv import load_dotenv  # ✅ Load environment variables from .env
+from dotenv import load_dotenv  
 
-# Load environment variables
 load_dotenv()
 
-JSON_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "jsons", "recognizeface.json")
+JSON_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)),"module","jsons", "recognizeface.json")
 
 # ✅ Get credentials from environment variables
 MYSQL_HOST = os.getenv("MYSQL_HOST")
@@ -145,3 +144,17 @@ def recognize(data):
 
 
 # ✅ Run recognition process
+if __name__ == "__main__":
+    data = load_json_data()
+    if data:
+        recognition_results = recognize(data)
+
+        if recognition_results:
+            print("\n🎯 Recognition Summary:")
+            for res in recognition_results:
+                print(f"🔹 Name: {res['name']}, Email: {res['email']}, Face ID: {res['face_id']}")
+                print(f"📷 Uploaded Image: {res['uploaded_image']}")
+                print(f"📷 Matched Image: {res['matched_image']}")
+        else:
+            print("⚠️ No faces recognized.")
+

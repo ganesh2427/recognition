@@ -2,7 +2,9 @@ import json
 import mysql.connector
 import os
 from dotenv import load_dotenv  # ✅ Load environment variables
-
+from backend.module.logger import get_logger
+logger = get_logger()
+import streamlit as st  # ✅ Streamlit for web app
 # ✅ Load environment variables from .env file
 load_dotenv()
 
@@ -33,10 +35,10 @@ def fetch_database_data():
     """Fetches face data from the MySQL database."""
     try:
         conn = mysql.connector.connect(
-            host=os.getenv("MYSQL_HOST"),
-            user=os.getenv("MYSQL_USER"),
-            password=os.getenv("MYSQL_PASSWORD"),  # ✅ Now securely stored
-            database=os.getenv("MYSQL_DATABASE"),
+            host=st.secrets.mysql.host,  # ✅ Use Streamlit secrets for credentials
+            user=st.secrets.mysql.user,
+            password=st.secrets.mysql.password,  # ✅ Secure credentials
+            database=st.secrets.mysql.database,
         )
         cursor = conn.cursor(dictionary=True)  # Fetch results as dictionary
 
@@ -56,6 +58,7 @@ def check_face_data():
     """Checks if the given name and email have a matching Face ID."""
     name, email = load_list_json()
     if not name or not email:
+        logger.info("No name and email found in list.json.")
         return None, "No name and email found in list.json."
 
     database_faces = fetch_database_data()
@@ -63,6 +66,7 @@ def check_face_data():
         return None, "No data found in the database."
 
     for row in database_faces:
+        logger.info(f"Database Row: {row}")  # Debugging statement
         print("Database Row:", row)  # Debugging statement
 
         # Ensure case-insensitive matching for name and email

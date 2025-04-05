@@ -10,11 +10,16 @@ from backend.module.listface import check_face_data, load_list_json, save_list_j
 import pandas as pd
 from backend.module.deleteface import delete_data
 from backend.module.recognizeface import save_recognize_json, load_json_data, recognize
-
+from backend.module.logger import get_logger
 
 JSON_FILE = os.path.join(os.path.dirname(__file__), "jsons", "input.json")
 LIST_JSON_FILE = os.path.join(os.path.dirname(__file__), "jsons", "list.json")
 
+
+
+ 
+
+logger = get_logger()
 
 def app():
      

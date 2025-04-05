@@ -2,6 +2,7 @@ import json
 import mysql.connector
 import requests
 import os
+import streamlit as st  # ✅ Streamlit for web app
 from dotenv import load_dotenv  # ✅ Load environment variables
 
 # ✅ Load environment variables from .env file
@@ -30,7 +31,7 @@ def addface(file_url):
     headers = {
         "accept": "application/json",
         "content-type": "application/json",
-        "authorization": f"Bearer {os.getenv('EDENAI_API_KEY')}",  # ✅ API Key from .env
+        "authorization": f"Bearer {st.secrets.edenai.api_key}",  # ✅ API Key from .env
     }
 
     try:
@@ -56,13 +57,26 @@ def insert_data(data):
     try:
         # Connect to MySQL
         conn = mysql.connector.connect(
-            host=os.getenv("MYSQL_HOST"),
-            user=os.getenv("MYSQL_USER"),
-            password=os.getenv("MYSQL_PASSWORD"),  # ✅ Secure credentials
-            database=os.getenv("MYSQL_DATABASE"),
+            host=st.secrets.mysql.host,  # ✅ Use Streamlit secrets for credentials
+            user=st.secrets.mysql.user,
+            password=st.secrets.mysql.password,  # ✅ Secure credentials
+            database=st.secrets.mysql.database,
         )
         if conn.is_connected():
             print("✅ Connected to MySQL database")
+            
+            # Create table if it doesn't exist
+            cur = conn.cursor()
+            create_table_sql = """
+            CREATE TABLE IF NOT EXISTS UserDetails (
+            MAIL_ID VARCHAR(255) PRIMARY KEY,
+            NAME VARCHAR(255) NOT NULL,
+            IMAGE_URL TEXT NOT NULL,
+            SERVER_ID TEXT NOT NULL
+            )"""
+            cur.execute(create_table_sql)
+            conn.commit()
+            print("✅ Table UserDetails is ready")
     except mysql.connector.Error as e:
         print(f"❌ MySQL Connection Error: {e}")
         return

@@ -1,4 +1,5 @@
 import json
+import streamlit as st
 import mysql.connector
 import requests
 import os
@@ -9,11 +10,11 @@ load_dotenv()
 JSON_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)),"module","jsons", "recognizeface.json")
 
 # ✅ Get credentials from environment variables
-MYSQL_HOST = os.getenv("MYSQL_HOST")
-MYSQL_USER = os.getenv("MYSQL_USER")
-MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD")
-MYSQL_DATABASE = os.getenv("MYSQL_DATABASE")
-EDENAI_API_KEY = os.getenv("EDENAI_API_KEY")
+MYSQL_HOST = st.secrets.mysql.host
+MYSQL_USER = st.secrets.mysql.user
+MYSQL_PASSWORD = st.secrets.mysql.password
+MYSQL_DATABASE = st.secrets.mysql.database
+EDENAI_API_KEY = st.secrets.edenai.api_key  # Secure API key
 
 
 # ✅ Save recognition input data to JSON file

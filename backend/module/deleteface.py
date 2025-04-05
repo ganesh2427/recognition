@@ -3,7 +3,7 @@ import mysql.connector
 import requests
 import os
 from dotenv import load_dotenv  # ✅ Load environment variables
-
+import streamlit as st  # ✅ Streamlit for web app
 # ✅ Load environment variables from .env file
 load_dotenv()
 
@@ -22,7 +22,7 @@ def deleteface(face_id):
     headers = {
         "accept": "application/json",
         "content-type": "application/json",
-        "authorization": f"Bearer {os.getenv('EDENAI_API_KEY')}",  # ✅ API Key from .env
+        "authorization": f"Bearer {st.secrets.edenai.api_key}",  # ✅ API Key from .env
     }
 
     response = requests.post(url, json=payload, headers=headers)

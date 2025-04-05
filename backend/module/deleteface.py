@@ -46,10 +46,10 @@ def delete_data(email):
     # Connect to MySQL database
     try:
         conn = mysql.connector.connect(
-            host=os.getenv("MYSQL_HOST"),
-            user=os.getenv("MYSQL_USER"),
-            password=os.getenv("MYSQL_PASSWORD"),  # ✅ Now securely stored
-            database=os.getenv("MYSQL_DATABASE"),
+            host=st.secrets.mysql.host,  # ✅ Use Streamlit secrets for credentials
+            user=st.secrets.mysql.user,
+            password=st.secrets.mysql.password,  # ✅ Secure credentials
+            database=st.secrets.mysql.database,
         )
         if not conn.is_connected():
             return False, "❌ Error: Unable to connect to MySQL database."

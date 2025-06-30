@@ -170,7 +170,11 @@ Upon submission:
    - This ensures users have control over their data and supports privacy compliance.
 
 
+WorkFlow:
 
+<p align="center">
+  <img src="image/workflow image.png" alt="Relative Path" width="600"/>
+</p>
 
 
 

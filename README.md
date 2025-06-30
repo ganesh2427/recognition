@@ -29,6 +29,25 @@ The codebase is modular and includes separate scripts for each operation, along 
 
 ## Table Of Contents
 
+- [Background](#Background)
+    - [Context and Motivation](#context-and-motivation)
+    - [Objectives](#objectives)
+    - [Significance of the Project](#significance-of-the-Project)
+- [System Functionality Overview](#System-Functionality-Overview)
+    - [Add Face](#Add-Face)
+    - [List Face](#List-Face)
+    - [Recognize-Face](#Recognize-Face)
+    - [Delete Face](#Delete-Face)
+- [Technologies Used](#Technologies-Used)
+    - [Core-Technologies](#Core-Technologies)
+    - [Cloud Services & APIs](#Cloud-Services-&-APIs)
+    - [Data Management](#Data-Management)
+    - [Dependency & Configuration Management](#Dependency-&-Configuration-Management)
+    - [External Communication](#External-Communication)
+- [Installation](#Installation)
+    - [Prerequisites](#Prerequisites)
+    - [Steps](#Steps)
+- [Project Structure](#Project-Structure)
 
 
 
@@ -65,7 +84,7 @@ Static Image Input: Operate on uploaded image files (not real-time webcam) for m
 
 Extensibility: Maintain code flexibility to easily support future features like real-time webcam input or alternative APIs.
 
-### Significance of the Study
+### Significance of the Project
 
 This project demonstrates that robust face verification can be achieved without relying on heavy local models by offloading the intelligence to reliable cloud services like Eden AI. The system offers a practical, resource-efficient alternative to conventional deep learning deployments, making it suitable for developers, startups, and organizations seeking to integrate biometric features without investing in complex infrastructure. Its clean modular structure encourages reuse and adaptation for different applications such as secure onboarding, user verification, or automated ID validation. Furthermore, with optional AWS S3 support, it showcases a hybrid design combining cloud computation and cloud storage — laying the groundwork for future extensions such as multi-user web apps or real-time monitoring interfaces.
 

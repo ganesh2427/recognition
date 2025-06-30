@@ -161,6 +161,61 @@ Upon submission:
 
 
 
+## Technologies Used
+
+This face recognition project leverages a combination of modern tools and frameworks to ensure scalability, security, and performance:
+
+### Core Technologies
+
+- Python 3.12+
+Primary programming language for backend logic and system integration.
+
+- Streamlit
+Lightweight and interactive framework for building web-based user interfaces in Python.
+
+### Cloud Services & APIs
+
+- Eden AI API
+Used for cloud-based face verification and comparison, enabling off-device processing for improved performance and scalability.
+
+- AWS S3 (Amazon Simple Storage Service)
+Cloud storage solution for securely storing and retrieving facial images.
+
+### Data Management
+
+- MySQL
+Relational database system for storing user profiles, face IDs, and associated metadata.
+
+- Pandas
+Powerful data analysis and manipulation library used for managing tabular data formats.
+
+### Dependency & Configuration Management
+
+- Poetry
+Modern Python dependency management and packaging tool for streamlined project setup and version control.
+
+- python-dotenv
+For loading environment variables securely from .env files, managing sensitive credentials and configuration settings.
+
+### xternal Communication
+
+- Requests
+HTTP library for making API calls to services like Eden AI.
+
+- boto3
+AWS SDK for Python to interact with AWS S3 and manage cloud resources programmatically.
+
+- mysql-connector-python
+Official MySQL connector for Python, facilitating secure and efficient database interaction.
+
+
+
+
+
+
+
+
+
 ## Requirements
 
 - Python >= 3.12

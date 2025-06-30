@@ -6,13 +6,34 @@ This project is a face verification system that uses the Eden AI API to compare 
 The codebase is modular and includes separate scripts for each operation, along with structured logging for monitoring and debugging. While the system currently works with uploaded images, it is flexible and can be extended to support real-time webcam-based input if needed. This makes it suitable for lightweight deployments in secure authentication, user onboarding, or ID verification systems. The design prioritizes clarity, modularity, and cloud compatibility for real-world use.
 ## Table Of Contents
 
-## Features
 
-- **Face Detection and Recognition**: Detects faces in images and matches them against a database of known faces.
-- **AWS S3 Integration**: Stores and retrieves images from an S3 bucket.
-- **MySQL Database**: Manages face data and metadata.
-- **Streamlit Interface**: Provides a user-friendly web interface for interacting with the system.
-- **Environment Configuration**: Uses `.env` for managing sensitive credentials.
+## Background
+
+This project implements a modular face verification system that utilizes Eden AI’s cloud-based face recognition API to compare and verify facial identities. It allows users to register, list, delete, and verify faces using static images, eliminating the need for real-time webcam input or locally hosted deep learning models. Optional integration with AWS S3 enables remote storage and backup of face data. The system leverages cloud intelligence for accurate verification, providing a lightweight, scalable solution suitable for various authentication and security applications.
+
+### Context and Motivation
+
+With the rapid growth of digital identity systems, face recognition has become a cornerstone in biometric authentication — from online onboarding and secure access control to surveillance and law enforcement. However, deploying accurate and efficient facial recognition solutions often requires high computational resources and complex infrastructure, which may not be practical for lightweight systems or developers lacking deep learning expertise. Traditional on-device recognition models can also face challenges related to scalability, maintenance, and performance in real-world scenarios.
+
+To address these limitations, this project adopts a cloud-first approach by integrating with Eden AI’s face recognition API. This eliminates the burden of model training, infrastructure scaling, and version control — making advanced face verification accessible, fast, and easily deployable.
+
+### Objectives
+
+This project aims to build a user-friendly, API-driven face verification system with the following goals:
+
+Cloud-based Recognition: Integrate Eden AI's face recognition API to compare image pairs and provide match results using similarity scores.
+
+Modular Design: Develop clear and independent scripts for face registration, listing, deletion, and verification.
+
+Cloud Storage: Allow optional uploading of face data to AWS S3 for backup, remote access, or distributed use.
+
+Static Image Input: Operate on uploaded image files (not real-time webcam) for more control and reproducibility.
+
+Extensibility: Maintain code flexibility to easily support future features like real-time webcam input or alternative APIs.
+
+### Significance of the Study
+
+This project demonstrates that robust face verification can be achieved without relying on heavy local models by offloading the intelligence to reliable cloud services like Eden AI. The system offers a practical, resource-efficient alternative to conventional deep learning deployments, making it suitable for developers, startups, and organizations seeking to integrate biometric features without investing in complex infrastructure. Its clean modular structure encourages reuse and adaptation for different applications such as secure onboarding, user verification, or automated ID validation. Furthermore, with optional AWS S3 support, it showcases a hybrid design combining cloud computation and cloud storage — laying the groundwork for future extensions such as multi-user web apps or real-time monitoring interfaces.
 
 ## Requirements
 

@@ -197,7 +197,7 @@ Modern Python dependency management and packaging tool for streamlined project s
 - python-dotenv
 For loading environment variables securely from .env files, managing sensitive credentials and configuration settings.
 
-### xternal Communication
+### External Communication
 
 - Requests
 HTTP library for making API calls to services like Eden AI.

@@ -85,9 +85,9 @@ The face verification system deployed through this application is designed to su
 ### 1. Add Face
 This operation allows users to register their identity into the system by providing the following details:
 
-   Name
+      Name
 
-   Email ID (used as the primary key)
+      Email ID (used as the primary key)
 
       Facial Image
 
@@ -104,9 +104,9 @@ This feature lays the foundation for future verification by ensuring each regist
 ### 2. List Face
 This feature retrieves the stored image and metadata for any registered user. The user needs to provide:
 
-   Name
+      Name
 
-   Email ID
+      Email ID
 
 The system will:
 
@@ -119,11 +119,11 @@ This feature is useful for reviewing enrolled identities.
 ### 3. Recognize Face
 This feature verifies whether an uploaded face matches a previously registered identity. To perform recognition, the user must submit:
 
-   Name
+      Name
 
-   Email ID
+      Email ID
 
-   Facial Image (to be verified)
+      Facial Image (to be verified)
 
 Internally, the system:
 
@@ -138,9 +138,9 @@ This task is core to the face verification system and enables reliable identity 
 ### 4. Delete Face
 This operation removes a user’s facial data from the system. The user must provide:
 
-   Name
+      Name
 
-   Email ID
+      Email ID
 
 Upon submission:
 

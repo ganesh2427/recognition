@@ -1,6 +1,9 @@
 # Recognition: Face Recognition System
 
-Recognition is a Python-based face recognition system that uses AWS S3 for image storage, MySQL for database management, and various Python libraries for face detection and recognition. This project is designed to identify and match faces from images.
+## Project Description
+This project is a face verification system that uses the Eden AI API to compare facial images and determine if they belong to the same person. Users can register, list, delete, and verify faces using static image inputs, with local image storage and optional AWS S3 integration for remote backups. Instead of running face recognition locally, the system offloads the comparison task to Eden AI’s cloud-based API, enabling accurate and scalable verification without the need for a heavy deep learning model on-device. 
+The codebase is modular and includes separate scripts for each operation, along with structured logging for monitoring and debugging. While the system currently works with uploaded images, it is flexible and can be extended to support real-time webcam-based input if needed. This makes it suitable for lightweight deployments in secure authentication, user onboarding, or ID verification systems. The design prioritizes clarity, modularity, and cloud compatibility for real-world use.
+## Table Of Contents
 
 ## Features
 
